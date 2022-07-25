@@ -52,20 +52,34 @@ const TextArea = React.forwardRef(function TextArea(
 
   const textareaProps = {
     id,
+    onKeyDown: (evt) => {
+      var key = evt.which;
+      if (textCount == maxCount && key == 32) {
+        evt.preventDefault();
+      }
+    },
     onChange: (evt) => {
       if (!other.disabled) {
         if (counterMode == 'default') {
           setTextCount(evt.target.value?.length);
         } else if (counterMode == 'words') {
-          // console.log(evt);
           if (!evt.target.value) {
+            console.log('reset');
             setTextCount(0);
+            return;
           }
           if (evt.target.value.match(/\w+/g).length <= maxCount) {
             textAreaRef.current.removeAttribute('maxLength');
             setTextCount(evt.target.value.match(/\w+/g).length);
           } else {
-            textAreaRef.current.maxLength = maxCount;
+            // extract first 10 words and use those
+            const first_max = evt.target.value
+              .split(/\s+/)
+              .slice(0, maxCount)
+              .join(' ');
+
+            setTextCount(maxCount);
+            textAreaRef.current.value = first_max;
           }
         }
 
