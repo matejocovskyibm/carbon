@@ -7203,6 +7203,7 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "cols": 50,
+      "counterMode": "default",
       "disabled": false,
       "enableCounter": false,
       "helperText": "",
@@ -7221,6 +7222,15 @@ Map {
       },
       "cols": Object {
         "type": "number",
+      },
+      "counterMode": Object {
+        "args": Array [
+          Array [
+            "default",
+            "words",
+          ],
+        ],
+        "type": "oneOf",
       },
       "defaultValue": Object {
         "args": Array [
